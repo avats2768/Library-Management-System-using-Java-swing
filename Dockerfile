@@ -1,14 +1,16 @@
-# Use OpenJDK 17
 FROM openjdk:17
 
-# Set working directory
 WORKDIR /app
 
-# Copy project files
+# Copy everything into the container
 COPY . .
 
-# Compile Java files
-RUN javac -d bin src/MyLibrary/DbConnection.java src/Main.java
+# Make sure the bin directory exists
+RUN mkdir -p bin
 
-# Run your main class
+# Compile all .java files under src/
+RUN find src -name "*.java" > sources.txt \
+    && javac -d bin @sources.txt
+
+# Run the main class
 CMD ["java", "-cp", "bin", "Main"]
