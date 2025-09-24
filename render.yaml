@@ -1,10 +1,13 @@
 services:
   - type: web
     name: my-java-app
-    env: node  # Temporarily using Node.js or Custom
+    env: custom  # Custom environment because we're not using Node.js or Docker
     buildCommand: |
+      # Install Java (OpenJDK 17)
       apt-get update && apt-get install -y openjdk-17-jdk  # Install OpenJDK 17
+      java -version  # Verify Java installation in logs
       mkdir -p bin && javac -d bin $(find src -name '*.java')  # Compile Java files
-    startCommand: "java -cp bin Main"  # Update with your correct class name if necessary
+    startCommand: |
+      java -cp bin Main  # If Main is in a package, replace "Main" with the fully qualified name (e.g., "com.example.Main")
     instances: 1
-    region: us-west  # Adjust the region if necessary
+    region: us-west  # You can adjust the region as needed
