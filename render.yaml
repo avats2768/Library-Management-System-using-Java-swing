@@ -3,7 +3,7 @@ services:
     name: my-java-app
     env: docker
     buildCommand: ""  # We're using Docker, so no build command is necessary
-    dockerfilePath: ./Dockerfile  # Path to the Dockerfile (make sure it's correct)
-    startCommand: "java -cp bin Main"  # Start the app (update this if you're using a package)
-    instances: 1  # Number of instances to run (you can change this)
-    region: us-west  # You can specify your desired region
+    dockerfilePath: ./Dockerfile  # Path to the Dockerfile in the root directory
+    startCommand: "java -cp bin com.example.Main"  # Change to the fully qualified name of Main class if inside a package
+    instances: 1  # Number of instances to run
+    region: us-west  # Adjust the region if necessary
