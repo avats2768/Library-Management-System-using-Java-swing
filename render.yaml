@@ -1,8 +1,10 @@
 services:
   - type: web
     name: my-java-app
-    env: java
-    buildCommand: "mkdir -p bin && javac -d bin $(find src -name '*.java')"  # Compile Java files
-    startCommand: "java -cp bin Main"  # Run the Java app (Main class should be in the src directory)
+    env: node  # Temporarily using Node.js or Custom
+    buildCommand: |
+      apt-get update && apt-get install -y openjdk-17-jdk  # Install OpenJDK 17
+      mkdir -p bin && javac -d bin $(find src -name '*.java')  # Compile Java files
+    startCommand: "java -cp bin Main"  # Update with your correct class name if necessary
     instances: 1
     region: us-west  # Adjust the region if necessary
