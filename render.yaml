@@ -10,8 +10,8 @@ services:
       javac -version && \
       mkdir -p bin && \
       javac -d bin $(find src -name '*.java')
-    startCommand: |
-      export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 && \
-      export PATH=$JAVA_HOME/bin:$PATH && \
+    startCommand: >
+      export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 &&
+      export PATH=$JAVA_HOME/bin:$PATH &&
       java -cp bin MyLibrary.Main
     instances: 1
