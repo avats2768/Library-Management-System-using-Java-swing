@@ -1,26 +1,17 @@
-/* Main class contains main() function*/
-
 package MyLibrary;
 
-import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 public class Main {
-
-	public static void main(String[] args) throws Exception {
-		try {
-		// set Look and Feel of Environment
-		String look_and_feel = "com.jtattoo.plaf.bernstein.BernsteinLookAndFeel";
-		UIManager.setLookAndFeel(look_and_feel);
-		// start execution from Login class
-		Login login = new Login();
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-
-		}
-	}
-
+    public static void main(String[] args) {
+        System.out.println("🟢 Starting Main...");
+        try {
+            // Comment out Swing
+            // UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
+            System.out.println("👀 Trying to create Login object...");
+            Login login = new Login();
+            System.out.println("✅ Login created.");
+        } catch (Exception e) {
+            System.err.println("🔥 ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
