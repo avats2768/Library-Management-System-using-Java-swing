@@ -1,13 +1,17 @@
 services:
   - type: web
     name: my-java-app
-    env: custom  # Custom environment because we're not using Node.js or Docker
+    env: custom
+    region: us-west
     buildCommand: |
-      # Install Java (OpenJDK 17)
-      apt-get update && apt-get install -y openjdk-17-jdk  # Install OpenJDK 17
-      java -version  # Verify Java installation in logs
-      mkdir -p bin && javac -d bin $(find src -name '*.java')  # Compile Java files
+      apt-get update && \
+      apt-get install -y openjdk-17-jdk && \
+      java -version && \
+      javac -version && \
+      mkdir -p bin && \
+      javac -d bin $(find src -name '*.java')
     startCommand: |
-      java -cp bin Main  # If Main is in a package, replace "Main" with the fully qualified name (e.g., "com.example.Main")
+      export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 && \
+      export PATH=$JAVA_HOME/bin:$PATH && \
+      java -cp bin MyLibrary.Main
     instances: 1
-    region: us-west  # You can adjust the region as needed
